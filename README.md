@@ -129,30 +129,7 @@ The integration between Judgeval and LlamaIndex's ReActAgent works as follows:
 
 3. **LLM Call Handling Limitation**: The internal LLM calls made by the ReActAgent **cannot be directly traced** due to a fundamental compatibility issue between Judgeval and LlamaIndex's OpenAI client. Judgeval's `wrap()` function does not support the llama_index.llms.openai.OpenAI client type. Despite this limitation, you can still get valuable insights into the agent's behavior through the tool and function traces.
 
-### Trace Information
 
-The traces include:
-
-- Tool function calls (parse_hand, hand_value, etc.)
-- The main agent function execution
-- Input/output values for each function
-- Execution time and other metrics
-- The sequence of tool calls made by the ReActAgent
-
-### Important Notes on Tracing
-
-1. **LLM Client Compatibility Limitation**: Judgeval's `wrap()` function **does not support** the llama_index OpenAI client. This is an important limitation to be aware of. The current implementation traces the tool functions and the main agent function, but **cannot trace the internal LLM calls** made by llama_index's ReActAgent.
-
-2. **Direct LLM Tracing**: If you want to trace the actual LLM calls, you can use the wrapped OpenAI client directly:
-
-   ```python
-   response = openai_client.chat.completions.create(
-       model="gpt-4o",
-       messages=[{"role": "user", "content": prompt}]
-   )
-   ```
-
-3. **Viewing Traces**: Log in to the [Judgment Platform](https://judgment.dev/) to view your traces. You'll see a timeline of function calls, their inputs/outputs, and performance metrics.
 
 ## Advanced Configuration
 
